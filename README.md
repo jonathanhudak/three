@@ -2,7 +2,7 @@
 
 ## Pages
 
-* [Texture Map](texture-map.html)
+* [Texture Map](https://jonathanhudak.github.io/three/texture-map.html)
 
 ## References
 
