@@ -30,6 +30,18 @@
     <script type="module">
       import * as THREE from "three";
       import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+      let textures = [
+        "images/leopard.jpg",
+        "images/Ilustration_V2_flat_illustration_tiled_crystal_geometric_hyper_real_8k_0.jpg",
+        "images/Default_rippling_foamy_waves_0.jpg",
+      ];
+
+      const getRandomTexture = () =>
+        textures[Math.floor(Math.random() * textures.length)];
+
+      const details = [0, 1, 4, 11, 0, 1];
+      const getRandomDodecaDetail = () =>
+        details[Math.floor(Math.random() * details.length)];
 
       let camera, scene, renderer;
       let mesh;
@@ -44,13 +56,18 @@
           1,
           1000
         );
-        camera.position.z = 400;
+        camera.position.z = 250;
 
         scene = new THREE.Scene();
 
-        const texture = new THREE.TextureLoader().load("images/ocean.jpg");
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        scene.add(directionalLight);
+        let texture = new THREE.TextureLoader().load(getRandomTexture());
 
-        const geometry = new THREE.BoxGeometry(200, 200, 200);
+        let geometry = new THREE.DodecahedronGeometry(
+          75,
+          getRandomDodecaDetail()
+        );
         const material = new THREE.MeshBasicMaterial({ map: texture });
 
         mesh = new THREE.Mesh(geometry, material);
@@ -61,8 +78,19 @@
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
+        const raycaster = new THREE.Raycaster();
 
-        //
+        function shiftObject() {
+          texture = new THREE.TextureLoader().load(getRandomTexture());
+          material.map = texture;
+          geometry = new THREE.DodecahedronGeometry(
+            75,
+            getRandomDodecaDetail()
+          );
+          mesh.geometry = geometry;
+        }
+
+        renderer.domElement.addEventListener("click", shiftObject, true);
 
         window.addEventListener("resize", onWindowResize);
       }
@@ -77,8 +105,8 @@
       function animate() {
         requestAnimationFrame(animate);
 
-        mesh.rotation.x += 0.0005;
-        mesh.rotation.y += 0.001;
+        mesh.rotation.x -= 0.005;
+        mesh.rotation.y += 0.005;
 
         renderer.render(scene, camera);
       }

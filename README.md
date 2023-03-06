@@ -13,3 +13,7 @@
 
 * <https://discoverthreejs.com/book/first-steps/textures-intro/>
 * <https://threejs.org/examples/?q=texture>
+
+## Images
+
+Generated via prompt with <leonardo.ai>
