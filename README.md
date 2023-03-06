@@ -2,7 +2,8 @@
 
 ## Pages
 
-* [Texture Map](https://jonathanhudak.github.io/three/texture-map.html)
+* [Texture Map w Cube](https://jonathanhudak.github.io/three/texture-map.html)
+* [Texture Map w Dodecahedron and click](https://jonathanhudak.github.io/three/texture-map-dodeca.html)
 
 ## References
 
